@@ -1,0 +1,46 @@
+<?php
+require_once("connexion.php");
+$response=array();
+if ((isset($_GET['nom'])) && (isset($_GET['prenom']))
+&& (isset($_GET['req'])) && (isset($_GET['lg']))
+&& (isset($_GET['alt'])) && (isset($_GET['tel']))
+&& (isset($_GET['type'])) && (isset($_GET['etat']))
+&&(isset($_GET['date'])) && (isset($_GET['image']))
+)
+{
+$nom=$_GET['nom'];
+$prenom=$_GET['prenom'];
+$req=$_GET['req'];
+lg=$_GET['lg'];
+alt=$_GET['alt'];
+$tel=$_GET['tel'];
+$type=$_GET['type'];
+$etat=$_GET['etat'];
+$date=$_GET['date'];
+$image=$_GET['image'];
+
+
+$result=mysql_query("insert into requete(nom,prenom,req,lg,alt,tel,type,etat,date,image)
+values('$nom','$prenom','$req','lg','alt','$tel','$type','$tel','$type','$etat','$date','$image')");
+if ($result){
+$response["success"]=1;
+$response["message"]="ajout avec succèes";
+
+echo json_encode($response);
+}
+else
+{
+$response["success"]=0;
+$response["message"]="error";
+
+echo json_encode($response);
+}
+}
+else
+{
+$response["success"]=0;
+$response["message"]="champs manquants";
+
+echo json_encode($response);
+}
+?>
